@@ -304,7 +304,7 @@ class Tokenizer {
 
 			if (array_key_exists($value, self::$token_types)) {
 				$type = self::$token_types[$value];
-				if (($type === T_POPEN) and ($prev->type === T_IDENT)) {
+				if (($type === T_POPEN) and isset($prev->type) and ($prev->type === T_IDENT)) {
 					$prev->type = T_FUNC;
 				}
 			} elseif (is_numeric($value)) {
