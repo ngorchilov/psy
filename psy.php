@@ -196,7 +196,7 @@ class ShuntingYard {
 						!in_array($stacked_token->type, array_keys(self::$ops)) or
 						!(
 							(
-								self::$ops[$token->type]['assoc'] === 1 and
+								self::$ops[$token->type]['assoc'] === 'l' and
 								(
 									self::$ops[$token->type]['preced'] <= self::$ops[$stacked_token->type]['preced']
 								)
