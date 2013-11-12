@@ -264,7 +264,7 @@ class ShuntingYard {
 class Tokenizer {
 
 	const
-		REGEX = '/^([!,\+\-\*\/\^%\(\)]|\d*\.\d+|\d+\.\d*|\d+|\$[a-z_A-Z0-9:]+|[a-z_A-Z]+[a-z_A-Z0-9]*|[ \t]+)/',
+		REGEX = '/^([!,\+\-\*\/\^%\(\)]|\d*\.\d+|\d+\.\d*|\d+|\$[a-z_A-Z0-9:\/]+|[a-z_A-Z]+[a-z_A-Z0-9]*|[ \t]+)/',
 		ERR_MATCH = 'syntax error near: `%s`',
 		ERR_EMPTY = 'invalid expression: `%s`';
 	static $token_types = array(
