@@ -7,23 +7,23 @@
  * Based on droptable's implementation available at
  * https://github.com/droptable/php-shunting-yard
  *
- * ---------------------------------------------------------------- 
+ * ----------------------------------------------------------------
  *
- * Permission is hereby granted, free of charge, to any person obtaining a 
- * copy of this software and associated documentation files (the "Software"), 
- * to deal in the Software without restriction, including without 
- * limitation the rights to use, copy, modify, merge, publish, distribute, 
- * sublicense, and/or sell copies of the Software, and to permit persons to 
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without
+ * limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense, and/or sell copies of the Software, and to permit persons to
  * whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included 
+ * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
- * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  * <http://opensource.org/licenses/mit-license.php>
@@ -40,7 +40,7 @@ const
 	T_OPERATOR		= 64,	// operator (currently unused)
 	T_PLUS			= 65,	// +
 	T_MINUS			= 66,	// -
-	T_MUL			= 67,	// * 
+	T_MUL			= 67,	// *
 	T_DIV			= 68,	// /
 	T_MOD			= 69,	// %
 	T_POW			= 70,	// ^
@@ -71,7 +71,7 @@ static $token_type_names = array(
 class Token
 {
 	public $type, $value, $argc = 0;
-  
+
 	public function __construct($type, $value) {
 		$this->type  = $type;
 		$this->value = $value;
@@ -87,7 +87,7 @@ class ShuntingYard {
 		ERR_UNMATCH = 'unmatched parenthesis `%s` found',
 		ERR_COMMA = 'commas are only allowed inside a function call',
 		ERR_UNKNOWN = 'unknown type % for value `%s`';
-		
+
 	static $ops = array(
 		T_PLUS			=> array('assoc' => 'l', 'preced' => 1),
 		T_MINUS			=> array('assoc' => 'l', 'preced' => 1),
@@ -125,10 +125,10 @@ class ShuntingYard {
 			}
 			$this->output[] = $token;
 		}
-		
+
 		$this->reset();
 	}
-	
+
 	function handle($token) {
 		switch($token->type) {
 			case T_NUMBER:
@@ -251,7 +251,7 @@ class ShuntingYard {
 		}
 		echo "\n";
 		$this->reset();
-	}	
+	}
 
 	public function reset() { return reset($this->output); }
 	public function first() { $this->reset(); return $this->curr(); }
@@ -264,7 +264,7 @@ class ShuntingYard {
 class Tokenizer {
 
 	const
-		REGEX = '/^([!,\+\-\*\/\^%\(\)]|\d*\.\d+|\d+\.\d*|\d+|\$[a-z_A-Z0-9:\/]+|[a-z_A-Z]+[a-z_A-Z0-9]*|[ \t]+)/',
+		REGEX = '/^([!,\+\-\*\/\^%\(\)]|\d*\.\d+|\d+\.\d*|\d+|\$[a-z_A-Z0-9:\/\-]+|[a-z_A-Z]+[a-z_A-Z0-9]*|[ \t]+)/',
 		ERR_MATCH = 'syntax error near: `%s`',
 		ERR_EMPTY = 'invalid expression: `%s`';
 	static $token_types = array(
@@ -297,7 +297,7 @@ class Tokenizer {
 			}
 
 			$expression = substr($expression, strlen($match));
-			
+
 			if (($value = trim($match)) === '') {
 				continue;
 			}
